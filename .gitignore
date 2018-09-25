@@ -1,0 +1,4 @@
+bin/
+.vscode/
+*.tgz
+*.zip
