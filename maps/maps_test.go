@@ -4,38 +4,29 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/apahl/collect/maps"
-	"github.com/apahl/collect/slices"
 )
 
-func TestKeys(t *testing.T) {
-	if v, r := map[int]bool{3: true, 5: true, 7: true}, []int{3, 5, 7}; !slices.IntIsEq(maps.IntBoolKeys(v), r) {
-		t.Error("Keys() should be [3 5 7].")
-	}
+func TestMap_Keys(t *testing.T) {
+	m := maps.Map{3: 0, 5: 0, 7: 0}
+	assert.Equal(t, m.Keys(), []maps.T{3, 5, 7})
 }
 
-func TestStringIntIsEq(t *testing.T) {
-	m1 := map[string]int{"eins": 1, "zwei": 2, "drei": 3}
-	m2 := map[string]int{"eins": 1, "drei": 3, "zwei": 2}
-	if !maps.StringIntIsEq(m1, m2) {
-		t.Error("Maps m1 and m2 should be equal.")
-	}
-	m3 := map[string]int{"eins": 1, "zwei": 2, "drei": 0}
-	if maps.StringIntIsEq(m1, m3) {
-		t.Error("Maps m1 and m3 should NOT be equal.")
-	}
-	m4 := map[string]int{"eins": 1, "zwei": 2}
-	if maps.StringIntIsEq(m1, m4) {
-		t.Error("Maps m1 and m4 should NOT be equal.")
-	}
-	m5 := map[string]int{"eins": 1, "zwei": 2, "vier": 4}
-	if maps.StringIntIsEq(m1, m5) {
-		t.Error("Maps m1 and m5 should NOT be equal.")
-	}
-
+func TestIsEq(t *testing.T) {
+	m1 := maps.Map{3: 0, 5: 0, 7: 0}
+	m2 := maps.Map{3: 0, 5: 0, 7: 0}
+	assert.True(t, maps.IsEq(m1, m2))
+	m3 := maps.Map{3: 0, 5: 1, 7: 0}
+	assert.False(t, maps.IsEq(m1, m3))
+	m4 := maps.Map{3: 0, 5: 0}
+	assert.False(t, maps.IsEq(m1, m4))
+	m5 := maps.Map{3: 0, 5: 0, 7: 2}
+	assert.False(t, maps.IsEq(m1, m5))
 }
 
-func ExampleIntBoolKeys() {
-	m := map[int]bool{3: true, 5: true, 7: true}
-	fmt.Println(maps.IntBoolKeys(m)) // => [3 5 7]
+func ExampleMap_Keys() {
+	m := maps.Map{3: 0, 5: 0, 7: 0}
+	fmt.Println(m.Keys()) // => [3 5 7]
 }
