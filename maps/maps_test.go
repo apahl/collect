@@ -37,7 +37,7 @@ func TestIntHashMap(t *testing.T) {
 	if m.Len() != 2 {
 		t.Errorf("Expected 2 items, got %d", m.Len())
 	}
-	m.Add(Employee{id: 2, name: "Bob", age: 21}, 5000) // Bob gets re-hired with a better salry.
+	m.Add(Employee{id: 2, name: "Bob", age: 21}, 5000) // Bob gets re-hired with a better salary.
 	if val, ok := m.Get(Employee{id: 2, name: "Bob", age: 21}); !ok || val != 5000 {
 		t.Errorf("Expected Bob to have a salary of 5000, got %d.", val)
 	}
@@ -97,7 +97,7 @@ func TestStringHashMap(t *testing.T) {
 	if m.Len() != 2 {
 		t.Errorf("Expected 2 items, got %d", m.Len())
 	}
-	m.Add(Person{name: "Bob", age: 21}, 5000) // Bob gets re-hired with a better salry.
+	m.Add(Person{name: "Bob", age: 21}, 5000) // Bob gets re-hired with a better salary.
 	if val, ok := m.Get(Person{name: "Bob", age: 21}); !ok || val != 5000 {
 		t.Errorf("Expected Bob to have a salary of 5000, got %d.", val)
 	}
